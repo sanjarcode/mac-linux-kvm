@@ -15,7 +15,7 @@ export default async function storeHandler(req, res) {
         taskResponse = await clearStore();
         break;
       case STORE_TASKS.APPEND:
-        taskResponse = await appendToStore(req.body.payload);
+        taskResponse = await appendToStore(req.body.text, req.body.time);
         break;
 
       default:
@@ -39,12 +39,12 @@ export default async function storeHandler(req, res) {
 
 export const INITIAL_STORE_STATE = "[]";
 
-export async function appendToStore(text) {
+export async function appendToStore(text, time) {
   const currentState = await readFromStore();
   const nextState = JSON.stringify([
     ...JSON.parse(currentState),
     {
-      time: new Date(),
+      time: time ? new Date(time) : new Date(),
       text,
     },
   ]);

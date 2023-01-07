@@ -18,7 +18,7 @@ export default function WritingPad({ initStore = [] }) {
     setLoading(false);
   };
 
-  const mutateStore = async () => {
+  const mutateStore = async (task, text, time) => {
     setLoading(true);
 
     const resp = await fetch("/api/store", {
@@ -26,7 +26,7 @@ export default function WritingPad({ initStore = [] }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ task: "RESET" }),
+      body: JSON.stringify({ task, text, time }),
     });
 
     const { currentState } = await resp.json();
@@ -46,7 +46,15 @@ export default function WritingPad({ initStore = [] }) {
 
   const clearHandler = (event) => {
     event.preventDefault();
-    mutateStore();
+    mutateStore("RESET");
+  };
+
+  const [inputText, setInputText] = useState("");
+
+  const addHandler = async (event) => {
+    event.preventDefault();
+    await mutateStore("APPEND", inputText, new Date());
+    setInputText("");
   };
 
   return (
@@ -77,7 +85,17 @@ export default function WritingPad({ initStore = [] }) {
           marginTop: "32px",
         }}
       >
-        <div style={{ border: "1px solid red", width: "50%" }}>b</div>
+        <div style={{ border: "1px solid red", width: "50%" }}>
+          <form onSubmit={addHandler}>
+            <input
+              type="text"
+              value={inputText}
+              onChange={(event) => setInputText(event.target.value)}
+              minLength="1"
+            />
+            <button disabled={!inputText}>Add</button>
+          </form>
+        </div>
         <div style={{ border: "1px solid red", width: "50%" }}>
           {loading && "Loading..."}
           {!loading && error && "Error"}
