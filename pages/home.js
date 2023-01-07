@@ -15,7 +15,7 @@ export default function HomePage({
           { label: "Hostame", value: hostname },
           { label: "IP address", value: ipAddress },
           { label: "MAC address", value: macAddress },
-          { label: "MAC address", value: platform },
+          { label: "Platform", value: platform },
         ].map(({ label, value }) => (
           <p key={label}>
             <span>{label}</span>
