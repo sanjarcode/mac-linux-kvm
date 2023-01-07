@@ -7,14 +7,13 @@ export default function TextCards({ store = [] }) {
       {store.length > 0 && (
         <div
           style={{
-            padding: "10px",
             display: "flex",
             flexDirection: "column",
             gap: "10px",
           }}
         >
           {store.map(({ time, text }) => (
-            <TextCard time={time} text={text} />
+            <TextCard time={time} text={text} key={time} />
           ))}
         </div>
       )}

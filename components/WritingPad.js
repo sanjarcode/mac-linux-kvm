@@ -85,21 +85,35 @@ export default function WritingPad({ initStore = [] }) {
           marginTop: "32px",
         }}
       >
-        <div style={{ border: "1px solid red", width: "50%" }}>
+        <div
+          style={{ border: "2px solid brown", width: "100%", padding: "10px" }}
+        >
           <form onSubmit={addHandler}>
             <input
               type="text"
               value={inputText}
               onChange={(event) => setInputText(event.target.value)}
               minLength="1"
+              style={{ minWidth: "50%" }}
             />
             <button disabled={!inputText}>Add</button>
           </form>
         </div>
-        <div style={{ border: "1px solid red", width: "50%" }}>
-          {loading && "Loading..."}
-          {!loading && error && "Error"}
-          {!loading && !error && <TextCards store={store} />}
+        <div
+          style={{
+            border: "2px solid brown",
+            width: "100%",
+            padding: "10px",
+            paddingTop: "12px",
+          }}
+        >
+          {!error && !(loading && store.length === 0) && (
+            <TextCards store={store} />
+          )}
+          <>
+            {!loading && error && "Error"}
+            {loading && "Loading..."}
+          </>
         </div>
       </div>
     </div>
