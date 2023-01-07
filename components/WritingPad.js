@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TextCards from "./TextCards";
 
 export default function WritingPad({ initStore = [] }) {
@@ -49,12 +49,13 @@ export default function WritingPad({ initStore = [] }) {
     mutateStore("RESET");
   };
 
-  const [inputText, setInputText] = useState("");
+  const inputTextRef = useRef();
+  const clearInputText = () => (inputTextRef.current.value = "");
 
   const addHandler = async (event) => {
     event.preventDefault();
-    await mutateStore("APPEND", inputText, new Date());
-    setInputText("");
+    await mutateStore("APPEND", inputTextRef.current.value, new Date());
+    clearInputText();
   };
 
   return (
@@ -91,11 +92,11 @@ export default function WritingPad({ initStore = [] }) {
           <form onSubmit={addHandler}>
             <input
               type="text"
-              value={inputText}
-              onChange={(event) => setInputText(event.target.value)}
+              placeholder="Write message and Hit Enter"
               minLength="1"
               style={{ minWidth: "50%" }}
               required
+              ref={inputTextRef}
             />
             <button>Add</button>
           </form>
