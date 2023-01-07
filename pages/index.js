@@ -16,7 +16,6 @@ export function getStaticProps() {
     props: {
       hostname,
       ipAddress: networkInfo.address || "NA",
-      macAddress: networkInfo.mac || "NA",
       platform,
     },
   };

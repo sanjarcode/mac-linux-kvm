@@ -1,9 +1,4 @@
-export default function DeviceInfoBar({
-  hostname,
-  ipAddress,
-  macAddress,
-  platform,
-}) {
+export default function DeviceInfoBar({ hostname, ipAddress, platform }) {
   return (
     <div>
       <div
@@ -16,7 +11,6 @@ export default function DeviceInfoBar({
         {[
           { label: "Hostame", value: hostname },
           { label: "IP address", value: ipAddress },
-          { label: "MAC address", value: macAddress },
           { label: "Platform", value: platform },
         ].map(({ label, value }) => (
           <p key={label}>
