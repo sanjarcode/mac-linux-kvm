@@ -1,8 +1,14 @@
 import os from "os";
 import DeviceInfoBar from "../components/shared/DeviceInfoBar";
+import WritingPad from "../components/WritingPad";
 
 export default function HomePage(props) {
-  return <DeviceInfoBar {...props} />;
+  return (
+    <>
+      <DeviceInfoBar {...props} />
+      <WritingPad />
+    </>
+  );
 }
 
 export function getStaticProps() {
