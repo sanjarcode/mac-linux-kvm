@@ -6,7 +6,7 @@ export const STORE_TASKS = {
   RESET: "RESET",
 };
 
-export default async function handler(req, res) {
+export default async function storeHandler(req, res) {
   let taskResponse = "no effect",
     currentState;
   if (req.method === "POST") {
