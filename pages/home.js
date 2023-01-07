@@ -33,12 +33,13 @@ export function getStaticProps() {
   const platform = os.platform();
   const networkInfo = Object.values(os.networkInterfaces())
     .flat()
-    .map(({ address }) => address.toString().startsWith("192"));
+    .find(({ address }) => address.toString().startsWith("192"));
+
   return {
     props: {
       hostname,
       ipAddress: networkInfo.address || "NA",
-      mac: networkInfo.mac || "NA",
+      macAddress: networkInfo.mac || "NA",
       platform,
     },
   };
