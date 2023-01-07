@@ -95,8 +95,9 @@ export default function WritingPad({ initStore = [] }) {
               onChange={(event) => setInputText(event.target.value)}
               minLength="1"
               style={{ minWidth: "50%" }}
+              required
             />
-            <button disabled={!inputText}>Add</button>
+            <button>Add</button>
           </form>
         </div>
         <div
